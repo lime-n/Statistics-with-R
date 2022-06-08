@@ -37,6 +37,7 @@ perModel(teengamb,response='gamble', predictor=c('I(income^2)'), pred=list('conf
 perPlot(models=lmod, predictors=c('status','verbal'), type='l')
 
 ```
+<img width="482" alt="Screenshot 2022-06-08 at 10 30 58" src="https://user-images.githubusercontent.com/68914515/172583613-ed2b43d3-b49f-4b27-a73a-ea56711dbb4e.png">
 
 
 Limitations:  
