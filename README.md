@@ -10,7 +10,8 @@ The following will be achieved:
 
 All the achievements have been reached with an additional package.
 
-Limitations:
+Limitations:  
+
 **perModel**:
 1. It can only take names of predictors and response without any whitespaces, symbols or numbers.
 2. We can only generate additive models and not multiplicative (yet).
