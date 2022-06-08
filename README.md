@@ -7,14 +7,36 @@ install.packages("https://github.com/lime-n/Statistics-with-R/blob/40272fa2e4fdc
 
 ```
 
-The following will be achieved:
-1. ~~Get all combinations of a model, grab the t-statistic and p-value for the t-statistic.~~
-2. ~~Next step, set an additional parameter to test for the null hypothesis.~~
-3. ~~From this, get the entire models F-statistic and P-value at the F-statistic.~~
-4. ~~Develop a function to calculate various hypotheses based on the current linear model coefficients~~
-5. ~~Additionally, develop a function that can make additional predictions and hypotheses on this plus a confidence interval.~~
+How to use the functions:
+**perModel:**
+```
+require(faraway)
+dara(teengamb)
 
-All the achievements have been reached with an additional package.
+#This gets a list of linear model combinations that involves either 'sex' or 'status'
+perModel(data=teengamb,response='gamble', predictor=c('sex','status'))
+
+#Get the confidence interval from the median input of the data
+perModel(teengamb,response='gamble', predictor=c('sex','status'),pred=list('confidence', 'median'))
+
+#get predictions on specific input of the data. The input must match the length of independent variables.
+perModel(teengamb,response='gamble', predictor=c('sex','status'),pred=list('prediction', c(9, 10, 6, 7)))
+
+#Log transformations on the data; getting the confidence interval based on a set interval of data.
+perModel(teengamb,response='gamble', predictor=c('log(status)', 'income'), pred=list('confidence',c(5, 8, 7, 8)))
+
+#a polynomial transformation on the predictor and a confidence interval given the average value across all predictors.
+perModel(teengamb,response='gamble', predictor=c('I(income^2)'), pred=list('confidence','median'))
+```
+**perPlot:**
+```
+#perPlot and how to use it
+
+#in this case I used the dataset: teengamb
+perPlot(models=lmod, predictors=c('status','verbal'), type='l')
+
+```
+
 
 Limitations:  
 
