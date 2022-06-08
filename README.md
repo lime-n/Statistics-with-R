@@ -33,7 +33,7 @@ perModel(teengamb,response='gamble', predictor=c('I(income^2)'), pred=list('conf
 ```
 #perPlot and how to use it
 
-#in this case I used the dataset: teengamb
+#lmod is a list of linear models - in this case I used the dataset: teengamb
 perPlot(models=lmod, predictors=c('status','verbal'), type='l')
 
 ```
