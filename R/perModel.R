@@ -41,10 +41,10 @@ perModel <- function(data, pred = NULL, ...) {
   formula_levels <- function(x) {
     if (nrow(x) < n)
       lapply(x, function(y)
-        reformulate(y, response = response) %>% deparse())
+        reformulate(y, response = response))
     else
       lapply(x[1], function(y)
-        reformulate(y, response = response) %>% deparse())
+        reformulate(y, response = response))
   }
 
   if ("all" %in% pr[[2]]) {
@@ -73,11 +73,25 @@ perModel <- function(data, pred = NULL, ...) {
   }
 
   formula_predictors <- map(predictors_wanted, formula_levels)
+  formulas_data<- formula_predictors %>% unlist() %>% 
+    deparse1() %>% 
+    str_split(',') %>% 
+    lapply(., function(x)
+      str_trim(x, side = "both") %>% 
+        stringr::str_replace(., '[^=]*', '') %>% 
+        gsub('=', '', .) %>% 
+        str_squish(.)) %>% 
+    unlist()%>%
+    data.frame(formulas = .)
   #formulas_data <-
-  #  formula_predictors %>% unlist() %>% data.frame(formulas = .)
+  #   formula_predictors %>% unlist() %>% data.frame(formulas = .)
 
-  lm_comb <- suppressWarnings(map(formula_predictors, function(x)
-    lm(eval(parse(text=x)), data)))
+  #lm_comb <- suppressWarnings(map(formula_predictors, function(x)
+  #  lm(eval(parse(text=x)), data)))
+  
+  lm_comb<-formula_predictors %>% unlist() %>% lapply(., function(x)lm(x, data))
+  
+  lm_test <- map(formula_predictors, function(x)eval(parse(text=x)))
 
   matrix_models <- lapply(lm_comb, model.matrix)
   if(is.null(pred) != TRUE){
