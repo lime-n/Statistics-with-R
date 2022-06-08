@@ -14,6 +14,9 @@ How to use the functions:
 require(faraway)
 data(teengamb)
 
+#This gets a list of all linear model combinations for the predictors
+perModel(data=teengamb,response='gamble', predictor='all')
+
 #This gets a list of linear model combinations that involves either 'sex' or 'status'
 perModel(data=teengamb,response='gamble', predictor=c('sex','status'))
 
