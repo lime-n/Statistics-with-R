@@ -53,3 +53,10 @@ Limitations:
 **perPlot**:
 1. Only testing at the 95th Confidence interval, in the near future this will be amended for any region on the interval.
 
+----
+
+*Issues:*
+
+08/06/2022
+1. some issues involving perModel, such that not all combinations were retrieved. This is now fixed, and all combinations are available.
+
