@@ -12,7 +12,7 @@ How to use the functions:
 **perModel:**
 ```
 require(faraway)
-dara(teengamb)
+data(teengamb)
 
 #This gets a list of linear model combinations that involves either 'sex' or 'status'
 perModel(data=teengamb,response='gamble', predictor=c('sex','status'))
