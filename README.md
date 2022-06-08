@@ -8,6 +8,7 @@ install.packages("https://github.com/lime-n/Statistics-with-R/blob/40272fa2e4fdc
 ```
 
 How to use the functions:
+
 **perModel:**
 ```
 require(faraway)
