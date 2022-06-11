@@ -61,7 +61,8 @@ New models:
 
 Taster:
 
-<img width="398" alt="Screenshot 2022-06-11 at 19 15 07" src="https://user-images.githubusercontent.com/68914515/173200103-ef1ef50e-194a-4f3b-a2b5-bf608d073cf3.png">
+<img width="388" alt="Screenshot 2022-06-11 at 22 52 05" src="https://user-images.githubusercontent.com/68914515/173206100-86516575-26d6-4aa2-9fa6-5d084c57f065.png">
+
 
 ----
 
