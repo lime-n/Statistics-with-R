@@ -14,7 +14,7 @@ perModel <- function(data,response,predictors, subs = NULL, pred = NULL) {
   #set the arguments
   #pr <- list(...)
   response = response
-  if (grepl('()', response, fixed = TRUE) == TRUE) {
+  if (grepl('(', response, fixed = TRUE) == TRUE) {
     response_val <- stringr::str_extract(response, '(?<=\\()[^\\^\\)]+')
     nm <- names(data)
     #get the predictors
@@ -52,7 +52,7 @@ perModel <- function(data,response,predictors, subs = NULL, pred = NULL) {
 
 
   } else  {
-    test_eval <- grepl('()', predictors, fixed=TRUE)
+    test_eval <- grepl('(', predictors, fixed=TRUE)
     extract_text<-c()
 
     for (i in 1:length(test_eval)) {
