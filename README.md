@@ -59,6 +59,10 @@ New models:
 
 **perDiag**: Interactive menu/input console for teaching or guiding linear model diagnostics when working with your dataset. (Completion: 80%)
 
+Taster:
+
+<img width="398" alt="Screenshot 2022-06-11 at 19 15 07" src="https://user-images.githubusercontent.com/68914515/173200103-ef1ef50e-194a-4f3b-a2b5-bf608d073cf3.png">
+
 ----
 
 *Issues:*
