@@ -1,20 +1,10 @@
-#' perModel
-#'
-#' @param data
-#' @param pred
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @examples
-perModel <- function(data, pred = NULL, ...) {
+perModel <- function(data,response,predictors, subs = NULL, pred = NULL) {
   library(tidyverse)
   #library(faraway)
   #set the arguments
-  pr <- list(...)
-  response = pr[[1]]
-  if (grepl('(', response, fixed = TRUE) == TRUE) {
+  #pr <- list(...)
+  response = response
+  if (grepl('()', response, fixed = TRUE) == TRUE) {
     response_val <- stringr::str_extract(response, '(?<=\\()[^\\^\\)]+')
     nm <- names(data)
     #get the predictors
@@ -47,29 +37,29 @@ perModel <- function(data, pred = NULL, ...) {
         reformulate(y, response = response))
   }
 
-  if ("all" %in% pr[[2]]) {
+  if ("all" %in% predictors) {
     predictors_wanted<-comb_predictors
 
 
   } else  {
-    test_eval <- grepl('(', pr[[2]], fixed=TRUE)
+    test_eval <- grepl('()', predictors, fixed=TRUE)
     extract_text<-c()
 
     for (i in 1:length(test_eval)) {
       if (test_eval[i] == TRUE) {
         #print(dots[[1]][i])
         extract_text[i] <-
-          stringr::str_extract(pr[[2]][i], '(?<=\\()[^\\^\\)]+')
+          stringr::str_extract(predictors[i], '(?<=\\()[^\\^\\)]+')
       } else {
-        extract_text[i] <- pr[[2]][i]
+        extract_text[i] <- predictors[i]
       }
     }
-    repl_predictors <- map(comb_predictors, ~ .x %>% mutate(across(everything(), ~ str_replace_all(.x, setNames(pr[[2]], extract_text)))))
+    repl_predictors <- map(comb_predictors, ~ .x %>% mutate(across(everything(), ~ str_replace_all(.x, setNames(predictors, extract_text)))))
 
     predictors_wanted <-
       lapply(repl_predictors, function(dat)
         Filter(function(x)
-          any(pr[[2]] %in% x), dat))
+          any(predictors %in% x), dat))
   }
 
   formula_predictors <- map(predictors_wanted, formula_levels)
@@ -83,15 +73,10 @@ perModel <- function(data, pred = NULL, ...) {
         str_squish(.)) %>% 
     unlist()%>%
     data.frame(formulas = .)
-  #formulas_data <-
-  #   formula_predictors %>% unlist() %>% data.frame(formulas = .)
 
-  #lm_comb <- suppressWarnings(map(formula_predictors, function(x)
-  #  lm(eval(parse(text=x)), data)))
-  
   lm_comb<-formula_predictors %>% unlist() %>% lapply(., function(x)lm(x, data))
   
-  lm_test <- map(formula_predictors, function(x)eval(parse(text=x)))
+  #lm_test <- map(formula_predictors, function(x)eval(parse(text=x)))
 
   matrix_models <- lapply(lm_comb, model.matrix)
   if(is.null(pred) != TRUE){
@@ -109,7 +94,7 @@ perModel <- function(data, pred = NULL, ...) {
           lapply(matrix_models, function(x)
             apply(x, 2, pred_type))
 
-        if ('all' %in% pr[[2]]) {
+        if ('all' %in% predictors) {
           prediction_lm <-
             mapply(
               function(a, b)
@@ -122,7 +107,7 @@ perModel <- function(data, pred = NULL, ...) {
           return(prediction_lm)
         } else{
           names_replace <-
-            map(summarise_matrix, ~ str_replace_all(names(.x), fixed(setNames(extract_text, pr[[2]]))))
+            map(summarise_matrix, ~ str_replace_all(names(.x), fixed(setNames(extract_text, predictors))))
           clean_matrix <-
             mapply(function(x, y)
               setNames(x, y), summarise_matrix, names_replace)
@@ -148,8 +133,8 @@ perModel <- function(data, pred = NULL, ...) {
           mutate(p_type = pred_type) %>%
           list()
 
-        if(!('all') %in% pr[[2]]){
-          named_vec <- setNames(pr[[2]], extract_text)
+        if(!('all') %in% predictors){
+          named_vec <- setNames(predictors, extract_text)
           pred_name <- map(pred_name, ~ .x %>%
                              mutate(across(
                                everything(), ~ str_replace_all(.x, named_vec)
@@ -179,9 +164,9 @@ perModel <- function(data, pred = NULL, ...) {
           pseudo_model_matrix %>% lapply(., function(x)
             x[length(x):0])
 
-        if (!('all') %in% pr[[2]]) {
+        if (!('all') %in% predictors) {
           names_replace <-
-            map(pseudo_model_matrix, ~ str_replace_all(names(.x), fixed(setNames(extract_text, pr[[2]]))))
+            map(pseudo_model_matrix, ~ str_replace_all(names(.x), fixed(setNames(extract_text, predictors))))
           pseudo_model_matrix <-
             mapply(function(x, y)
               setNames(x, y), pseudo_model_matrix, names_replace)
@@ -206,7 +191,9 @@ perModel <- function(data, pred = NULL, ...) {
     }
   }
 
-
+  
+  formula_names <- formula_predictors %>% unlist() %>% lapply(., deparse) %>% map(., trimws) %>% map(., function(x)paste(x,collapse=" ")) %>% unlist() %>% data.frame(list_names=.)  
+  names(lm_comb) <- formula_names$list_names
   return(lm_comb)
 
 }
