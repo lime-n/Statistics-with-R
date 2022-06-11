@@ -1,3 +1,13 @@
+#' perModel
+#'
+#' @param data
+#' @param pred
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 perModel <- function(data,response,predictors, subs = NULL, pred = NULL) {
   library(tidyverse)
   #library(faraway)
@@ -63,16 +73,10 @@ perModel <- function(data,response,predictors, subs = NULL, pred = NULL) {
   }
 
   formula_predictors <- map(predictors_wanted, formula_levels)
-  formulas_data<- formula_predictors %>% unlist() %>% 
-    deparse1() %>% 
-    str_split(',') %>% 
-    lapply(., function(x)
-      str_trim(x, side = "both") %>% 
-        stringr::str_replace(., '[^=]*', '') %>% 
-        gsub('=', '', .) %>% 
-        str_squish(.)) %>% 
-    unlist()%>%
-    data.frame(formulas = .)
+  formulas_data <-
+    formula_predictors %>% unlist() %>% lapply(., paste) %>% lapply(., function(x)
+      x[c(2, 1, 3)]) %>% lapply(., function(x)
+        paste(x, collapse = " "))
 
   lm_comb<-formula_predictors %>% unlist() %>% lapply(., function(x)lm(x, data))
   
@@ -197,3 +201,5 @@ perModel <- function(data,response,predictors, subs = NULL, pred = NULL) {
   return(lm_comb)
 
 }
+
+
