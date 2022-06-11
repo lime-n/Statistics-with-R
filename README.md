@@ -54,6 +54,7 @@ Limitations:
 **perPlot**:
 1. Only testing at the 95th Confidence interval, in the near future this will be amended for any region on the interval.
 
+----
 New models:
 
 **perDiag**: Interactive menu/input console for teaching or guiding linear model diagnostics when working with your dataset. (Completion: 60%)
