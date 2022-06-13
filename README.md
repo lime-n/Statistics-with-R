@@ -57,7 +57,7 @@ Limitations:
 ----
 New models:
 
-**perDiag**: Interactive menu/input console for teaching or guiding linear model diagnostics when working with your dataset. (Completion: 68%)
+**perDiag**: Interactive menu/input console for teaching or guiding linear model diagnostics when working with your dataset. (Complete)
 
 Taster:
 
@@ -70,4 +70,8 @@ Taster:
 
 08/06/2022
 1. some issues involving perModel, such that not all combinations were retrieved. This is now fixed, and all combinations are available.
+
+13/06/2022
+1.perDiag needs updated for residual regressions on the following:
+   - Generalise the number of predictors from the models so the regressions runs on all model types.
 
