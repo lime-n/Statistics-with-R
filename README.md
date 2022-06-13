@@ -1,9 +1,9 @@
 # Statistics-with-R
 A public library that will allow for automatic hypothesis testing on predictors.
 
-To install the package in `R` copy and paste the following (Unfortunately direct installation is currently not working):
+To install the package in `R` copy and paste the following (WORKING!):
 ```
-install.packages("https://github.com/lime-n/Statistics-with-R/blob/40272fa2e4fdc54e5acccb284aa9961b5644ca89/Hypothesis%20Testing/PerModel_0.1.0.tar.gz",repos = NULL, type="source") 
+devtools::install_github("https://github.com/lime-n/Statistics-with-R/blob/c99c4a86466260a7ad070920a2f3e8753fcaf971/Hypothesis%20Testing/PerModel_0.1.0.tar.gz")
 
 ```
 
