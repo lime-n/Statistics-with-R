@@ -57,7 +57,7 @@ Limitations:
 ----
 New models:
 
-**perDiag**: Interactive menu/input console for teaching or guiding linear model diagnostics when working with your dataset. (Completion: 80%)
+**perDiag**: Interactive menu/input console for teaching or guiding linear model diagnostics when working with your dataset. (Completion: 68%)
 
 Taster:
 
