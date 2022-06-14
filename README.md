@@ -73,7 +73,8 @@ Taster:
 1. some issues involving perModel, such that not all combinations were retrieved. This is now fixed, and all combinations are available.
 
 13/06/2022
-1.perDiag needs updated for residual regressions on the following:
+
+1.perDiag needs updating for residual regressions on the following:
    - Generalise the number of predictors from the models so the regressions runs on all model types.
 
 14/06/2022
