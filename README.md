@@ -74,7 +74,7 @@ Taster:
 
 13/06/2022
 
-1.perDiag needs updating for partial regressions on the following:
+1. perDiag needs updating for partial regressions on the following:
    - Generalise the number of predictors from the models so the regression runs on all model types.
      - Update: Using only the model with the full number of predictors as of now.
 
