@@ -75,7 +75,7 @@ Taster:
 13/06/2022
 
 1.perDiag needs updating for residual regressions on the following:
-   - ~~Generalise the number of predictors from the models so the regression runs on all model types.~~
+   - Generalise the number of predictors from the models so the regression runs on all model types.
 
 14/06/2022
 1. perDiag needs working on for the following: splines, additive models and complex models. There is no easy way to make the interaction for these in a simple way because it strongly depends on what you're after. However, plans to develop this are underway.
